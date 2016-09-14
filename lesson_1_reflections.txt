@@ -1,0 +1,98 @@
+Concepts
+——————————
+git repository   #is a collection of files that are tracked by Git as a cohesive unit
+log              #log shows you commits in a given repository prior to the current commit
+diff		 #diff shows the difference between two commits
+HEAD             # head is what git calls the commit that you’re currently working on.
+
+When you use “$git checkout commitID” there is a message:
+You are in 'detached HEAD' state: you’re in another commit different from HEAD. Then, if you use $git log, in the history, this commitID, the one you’ve just checkout, will be appeared at first as the most recent commit.
+
+$git checkout #temporarily reset all files in a directory to their state at the time of a specific commit.It takes one argument - the commit ID to restore.
+$git checkout -b new_branch_name   #create a new branch to retain the commits you create 
+					
+$git clone    #make a copy of an entire Git repository, including the history, onto your own computer. It takes one argument - the url of the repository to copy. 
+
+$git diff   #compare two commits, printing each line that is present in one commit but not the other. It takes two arguments - the two commit ids to compare. So, if you want to compare what have been added in a new version or commit, compare $git diff oldcommitID newcommitID 
+
+$git log   #Show the commits made in this repository, starting with the most recent.
+—————— —— ———
+
+1. How did viewing a diff between two versions of a file help you see the bug that was introduced?
+
+$diff command is useful to check what have been added or deleted from your code. You can compare two files or two versions.
+
+$diff -u old.txt new.txt
+
+//with $diff we can compare two files and check what have been added or removed.
+//-u is used to show the differences in a more readable way
+
+——————— 
+In the terminal, we can use this code to create directories “mkdir”, for example:
+cd ~                          # change directories to your home directory
+mkdir version-control         # make version-control directory
+cd version-control            # go to version-control directory
+mkdir reflections             # create reflections directory
+cd reflections                # go to reflections directory
+subl lesson_1_reflections.txt # launch sublime with file called lesson_1_reflections.txt (you can replace subl with another editor here if you prefer a different one)
+
+
+2. How could having easy access to the entire history of a file make you a more
+efficient programmer in the long term?
+
+I could access to a version and retrieve code, as well as find bugs easily and make improvements of the code.
+
+3. What do you think are the pros and cons of manually choosing when to create a
+commit, like you do in Git, vs having versions automatically saved, like Google
+docs does?
+
+You can choose when to make a commit, whether if there is a big change or because you include a new feature. It’s also great to include a meaningful message of the commit.
+Git let you to keep track of all your commits and wrap them up as your convenience.
+
+A good rule of thumb is to “make one commit per logical change solution”.
+
+4. Why do you think some version control systems, like Git, allow saving multiple
+files in one commit, while others, like Google Docs, treat each file separately?
+
+I think because when you launch an app or website all files in the repository works together as one. 
+The biggest useful thing about version control is when I’m working on something bigger on my own. If I’m doing a small task it’s kind of ok to be able to do it without any version control. But if it’s sth bigger I really like to be able to break it up into pieces, to kind of think about my work in terms of a bunch of steps, and to be able to fix all of my mistakes by moving forward and backward. And kind of get everything together in the right way before I’m really ready to share it with other people.
+
+5. How can you use the commands git log and git diff to view the history of files?
+
+$git log     #see the history of the code, commits, author, date and message.
+	     #show a list of the recent commits with info about them, including commit IDs
+$git diff    #compare two versions of the file using the commit identifier. 
+             #$git diff old/first commitIDs new/second commitIDs
+
+$git log —-stat #the —-stat command gives some statistics about 
+		#which files of your repository have changed in each commit
+		# + plus indicates additions, — minus indicates deletions
+
+$git diff --stat commitIDold commitIDnew   #compare how many additions and deletions have 					   #been made in the commitIDnew
+
+6. How might using version control make you more confident to make changes that
+could break something?
+
+The thing I really like of version control is the idea of exploration, it makes me to explore deep concepts. I’m able to rethink, make changes, include new features and then commit changes without fear of breaking the entire project.
+
+Developing as a programmer is taking baby steps of making a program incrementally better.
+
+Cloning a Repository
+To clone a repository, run git clone followed by a space and the repository URL.
+
+$git clone https://github.com/udacity/asteroids.git    #copy a repository on your computer
+
+Getting Colored Output: red for deletions and green for additions
+To get colored diff output, run git config --global color.ui auto
+$git config    #changes your settings in Git
+	       # —-global:apply to all your Git projects
+
+
+Exiting git log
+To stop viewing git log output, press q (which stands for quit).
+
+7.Now that you have your workspace set up, what do you want to try using Git for?
+
+I’m going to use git for all my upcoming projects :)
+
+
