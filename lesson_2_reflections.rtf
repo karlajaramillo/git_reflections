@@ -1,8 +1,10 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
-{\fonttbl\f0\fnil\fcharset0 UbuntuMono-Regular;\f1\fnil\fcharset0 UbuntuMono-Italic;}
-{\colortbl;\red255\green255\blue255;\red77\green77\blue77;\red255\green39\blue18;\red62\green62\blue62;
-\red184\green14\blue61;\red247\green238\blue241;\red217\green11\blue0;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11700\viewh8400\viewkind0
+{\fonttbl\f0\fnil\fcharset0 UbuntuMono-Regular;\f1\fnil\fcharset0 UbuntuMono-Bold;\f2\fnil\fcharset0 UbuntuMono-Italic;
+}
+{\colortbl;\red255\green255\blue255;\red77\green77\blue77;\red217\green11\blue0;\red0\green186\blue251;
+\red77\green77\blue77;\red255\green39\blue18;\red62\green62\blue62;\red184\green14\blue61;\red247\green238\blue241;
+\red102\green177\blue50;\red254\green73\blue64;\red134\green205\blue77;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11420\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0\fs24 \cf2 - - - - - - - - - - - - - - - - - - - - - - - - - - -\
@@ -11,19 +13,68 @@ Lesson 2 \
 - - - - - - - - - - - - - - - - - - - - - - - - - - -\
 - - - - - - - - - - - - - - - - - - - - - - - - - - -\
 \
-commit: snapshot of a repository\
-repository: bunch of files\
-staging area: you put files on it before to make a commit\
+>> Repository: contains several commits, and each commit contains several files: .js, .html, .css\
+>> Commit: snapshot of a repository, contains several files. git diff commitID_old commitID_new\
+>> Staging area: It\'92s a copy of the most recent commit of the Repository until I add changes to it. \
+>> Working directory: has the same files, but with updates that need to be added and committed.\
+>> \cf2 \expnd0\expndtw0\kerning0
+Master: main branch in most Git repo, and every time I create a repo, Git creates a master branch for you.\cf2 \kerning1\expnd0\expndtw0 \
+\
+>> Staging area and working directory don\'92t have IDs commits because they are not commits, so to compare files, you can use \cf3 git diff\cf2  without arguments.\
+\
+>> git checkout commitID    - you have this message when you checkout a commitID, not a branch. Message:  \'93 You are in \'91detached HEAD\'92 state \'93, HEAD is the current commit, so HEAD now points to this commitID. Any change won\'92t impact any branches, since you\'92re making changes on this commit, and it won\'92t show up in git log, it\'92s not reachable. Then, if you want to make a new branch use git checkout -b new_branch_name\
+\
+
+\fs18 \cf4 monina (master) asteroids $ git checkout c4f8e670402aa844c81f0ec9594d838268962300\
+Note: checking out 'c4f8e670402aa844c81f0ec9594d838268962300'.\
+\
+You are in '
+\f1\b detached HEAD
+\f0\b0 ' state. You can look around, make experimental     \
+changes and commit them, and you can discard any commits you make in this\
+state without impacting any branches by performing another checkout.\
+\
+If you want to create a new branch to retain commits you create, you may\
+do so (now or later) by using -b with the checkout command again. Example:\
+\
+  git checkout -b new_branch_name
+\fs24 \cf2 \
 \
 ls -a: list of all files, included the ones with a doth, which are hidden for users, ex: .git\
 \
 git init        - initialize a git repository. Create a repository\
 git add         - add a file or changes to the staging area, ready to make a commit\
 git add .       - add all files that have been changed\
-git status	  - show what files are ready to commit in green. The untracked files in red.\
-git commit -m   - commit files from the staging area \
+git add game.js  -add the file you changed to the staging area\
+git commit      - commit the changes to the branch, so the working directory is clean\
+git status	  - show what files are ready to commit in green. The untracked files in red. \
+			  - If your working directory has nothing to commit, there will be a message \'93On branch master\
+			    nothing to commit, working directory clean\'94\
 \
+git log                - show history of brances or commitsID\
+git commit -m   		- commit files from the staging area.\
 \
+git diff         		- \cf2 \expnd0\expndtw0\kerning0
+compare branches or commitsID between Staging area and Working \
+directory\cf2 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720
+\cf5 \expnd0\expndtw0\kerning0
+git diff \'97 \'97 staged 		- compare Staging area and the most recent commit from the Repository. Just the changes that will be added, and then committed.\
+git diff commit1 commit2      - compare only commit 1 and 2\
+\
+git reset \'97 \'97hard   - discard any changes in either the working directory or the staging area. Be very careful, because you can\'92t get these changes back!!!!\
+\
+git branch        	  - list branches of the repo\
+git branch new_branch_name 	  - create a branch\
+git checkout -b \cf2 new_branch_name\cf5  - create a new branch and checkout to it\
+\
+git show commitID          - show differences between a branch and its parent, specially useful when you had merged a branch into master\
+\
+\cf2 git log --graph --oneline    -being on master branch, it\'92ll show the graph of the commmits, included commits from other branches merged before\cf5 \
+\cf2 \kerning1\expnd0\expndtw0 \
+git merge          - merge two commits, master and your commit\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf2 \
 \pard\pardeftab720
 \cf2 \expnd0\expndtw0\kerning0
 1. What happens when you initialize a repository? Why do you need to do it?\
@@ -44,43 +95,156 @@ Untracked files - show the untracked files\expnd0\expndtw0\kerning0
 2. How is the staging area different from the working directory and the repository?\
 What value do you think it offers?\
 \
-You can add files individually to the \'93staging area\'94 just using \cf3 git add 
-\f1\i name_file 
+You can add files individually to the \'93staging area\'94 just using \cf6 git add 
+\f2\i name_file 
 \f0\i0 \cf2 \
 Ex: git add lesson_1_reflections\
 \
 \pard\pardeftab720
-\cf4 \expnd0\expndtw0\kerning0
-If you accidentally add a file to the staging area, you can remove it using \cf5 \cb6 \expnd0\expndtw0\kerning0
-git reset\cf4 \cb1 \expnd0\expndtw0\kerning0
-. For example, if you accidentally add lesson_2_reflections.txt, but don\'92t want it to be committed yet, run \cf5 \cb6 \expnd0\expndtw0\kerning0
-git reset lesson_2_reflections.txt\cf4 \cb1 \expnd0\expndtw0\kerning0
+\cf7 \expnd0\expndtw0\kerning0
+If you accidentally add a file to the staging area, you can remove it using \cf8 \cb9 \expnd0\expndtw0\kerning0
+git reset\cf7 \cb1 \expnd0\expndtw0\kerning0
+. For example, if you accidentally add lesson_2_reflections.txt, but don\'92t want it to be committed yet, run \cf8 \cb9 \expnd0\expndtw0\kerning0
+git reset lesson_2_reflections.txt\cf7 \cb1 \expnd0\expndtw0\kerning0
  and the file will be removed from the staging area, but it will still be in your working directory.\cf2 \expnd0\expndtw0\kerning0
+\
+\
+\
+\pard\pardeftab720
+\cf10 Staging area:\cf2  is where you add changes to be committed. So you need to use \cf3 git add\cf2  to put a file/changes on the staging area.\
+\
+\cf10 Working directory:\cf2  is where you have changes to be added and committed.\
+\
+>>>>>To compare files between Staging area and Working directory, use \cf3 git diff \cf2 \expnd0\expndtw0\kerning0
+without arguments, it will show changes in the Working directory that need to be added to the Staging area.\
+\cf2 \expnd0\expndtw0\kerning0
+\
+>>>>>To compare Staging area and Repository, use \cf3 git diff \'97staged. \cf2 \expnd0\expndtw0\kerning0
+Show exactly what it\'92s ready to be committed. \cf2 \expnd0\expndtw0\kerning0
 \
 \
 \
 3. How can you use the staging area to make sure you have one commit per logical\
 change?\
+\pard\pardeftab720
+\cf2 \expnd0\expndtw0\kerning0
 \
-- Add file to the staging area typing: \cf3 git add 
-\f1\i name_file 
+- Add file to the staging area typing: \cf6 \expnd0\expndtw0\kerning0
+git add 
+\f2\i \cf6 \expnd0\expndtw0\kerning0
+name_file 
 \f0\i0 \cf2 \expnd0\expndtw0\kerning0
-, \
-- Then, use \cf3 \expnd0\expndtw0\kerning0
+\
+>>>>>To compare Staging area and Repository, use \cf3 git diff \'97staged. \cf2 Show exactly what it\'92s ready to be committed. \cf2 \expnd0\expndtw0\kerning0
+\
+\cf2 \expnd0\expndtw0\kerning0
+- Then, use \cf6 \expnd0\expndtw0\kerning0
 git status \cf2 \expnd0\expndtw0\kerning0
 to make sure you have only the files you want to commit. You\'92ll see a message: Changes to be committed and the files in green.\
-- When you\'92re ready, use \cf7 git commit -m \'93Commit message\'94 \cf2 \
+- When you\'92re ready, use \cf3 git commit -m \'93Commit message\'94 \
+\
+\cf2 \
 \pard\pardeftab720
 \cf2 \expnd0\expndtw0\kerning0
 \
 4. What are some situations when branches would be helpful in keeping your history\
 organized? How would branches help?\
 \
+>>Branches are good to collaborate publicly\
+We can create a branch when we want to create another version of the master, to work on a new feature, correct a bug, do experiments, that are not official yet, make improvements or something different. You may have experimental branches or unique feature branches, those of things you\'92re working on, but isn\'92t a production quality work just yet because maybe it\'92s going to break.\
+\
+When we have a project, We have a production quality master branch that never breaks and always works, and then, you could have a development branch where active work is taking place on your project.\
+\
+>>Branches are good to collaborate with yourself\
+When I\'92m working on a new feature and come across with a bug, branches allow to fix bugs and share code.\
+\
+Git branches help you keep a project organized, particularly, when you\'92re working with others and sharing a project publicly.\
+\
+\
+Common steps:\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf2 \kerning1\expnd0\expndtw0 >> git checkout -b  \cf2 \expnd0\expndtw0\kerning0
+new_branch_name\cf2 \kerning1\expnd0\expndtw0            - create a new branch from the one you want to retain commits (ex: being on master you create a new branch to retain all the changes), make a copy of that branch with -b command, then checkout to that new branch. \
+>> git add . or git add newFile         - add to the staging area the changes \
+>> git commit						  - commit the changes to the branch you\'92re working on. Now you\'92ll need to push your changes to the master.\expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720
+\cf2 \expnd0\expndtw0\kerning0
+\
 5. How do the diagrams help you visualize the branch structure?\
+\
+git log --graph --oneline master nameBranch  -  show history of master and your branch\
+\
+We can know how is reachable, for example if I create a new branch from one commit, it won\'92t be reachable and don\'92t be show up in history, git log. Only in the history of that branch.\
+\
+It\'92s important to use arrows imaginatively in git log, just to take into account the parent of branches.\
 \
 6. What is the result of merging two branches together? Why do we represent it in\
 the diagram the way we do?\
 \
+If I merge a branch to the master, the history will appear when I run git log.\
+\
+>> git checkout master   	  	-First, checkout to master\
+>> git branch              	  	-make sure you\'92re in master branch\
+>> git merge master new_branch_name -an editor will be shown, you can edit the message for the commit\
+>> git log  				- show history, including commits from our branch\
+\
+>>git branch -d new_branch_name     -being on master, delete the branch, once we had merged changes into master and we won\'92t use it anymore. It will delete the label of branch, but all the commits are reachable from master now, since we had merged changes before.\
+\
+>>git branch    				- list branches available, it won\'92t show the deleted branch\
+\
 7. What are the pros and cons of Git automatic merging vs. always doing merges\
 manually?\
+\
+If you\'92re in your new branch, you should want to have the latest version of master, so, you\'92ll need to merge master into your branch.\
+\
+>> git merge master my_branch     - being on your branch.\
+If there is a message: CONFLICT (content): Merge conflict in game.js.  You\'92ll need to resolve the conflict.\
+\
+To resolve the conflict, open the file, you\'92ll find out 3 sections:\
+\cf11 <<<<<<< HEAD\
+\cf2 \
+
+\fs28 \cf12 the top section marked \'93HEAD\'94 is my code    >>>>> 
+\f1\b My code
+\f0\b0 \
+
+\fs24 \cf2 \
+\cf6 ||||||| merged common ancestors\
+\
+\pard\pardeftab720
+
+\fs28 \cf12 \expnd0\expndtw0\kerning0
+the middle section marked \'93common ancestors\'94 is the original version that both branches modified. So is the section that I modified in my code, and another contributor modified in master.   >>>>> 
+\f1\b \cf12 \expnd0\expndtw0\kerning0
+Code changed 
+\f0\b0\fs24 \cf6 \expnd0\expndtw0\kerning0
+\
+\
+=======\
+\
+
+\fs28 \cf12 \expnd0\expndtw0\kerning0
+the bottom section marked \'93master\'94 is the code is in master right now.\
+this shows the changes between \'93merged common ancestors\'94 and this master.\
+>>>>> 
+\f1\b \cf12 \expnd0\expndtw0\kerning0
+Code in master branch
+\f0\b0 \cf12 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720
+
+\fs24 \cf6 \expnd0\expndtw0\kerning0
+\
+>>>>>>> master\cf2 \
+\
+\
+To solve this, I can erase and keep the code I want to resolve the conflict. Then I can use: git add name_file and then, git commit. \
+\
+\
+Sometimes merge automatically can create problems, so maybe we can discuss with the contributors which code will be used or which code we must keep.\
+\
+\
+\
 }
