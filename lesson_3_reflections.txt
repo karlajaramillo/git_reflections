@@ -1,0 +1,72 @@
+- - - - - - - - - - - - - - - - - - - - - - - - - - -
+- - - - - - - - - - - - - - - - - - - - - - - - - - -
+Lesson 3 
+- - - - - - - - - - - - - - - - - - - - - - - - - - -
+- - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+>> Local:
+- Working directory
+- Staging area
+- Commit history
+
+Git is a part of GitHub
+Clone operates with remote
+When you push or pull operates on branches, taken a branch an push or pull to/from the origin or remote repository.
+
+
+Steps to add a remote repository on GitHub
+1- on GitHub create a new repository
+
+2- copy the url given by Github
+
+3- make sure there are no remote repos in your local
+>>git remote     - list remote repositories
+
+4- add the remote repository name, it is usually “origin”, and the url you picked in step 2.
+>>git remote add origin url_git   
+
+5- make sure you have created the remote repo, -v is verbose for more info
+>>git remote -v 
+
+To list all branches: 
+>>git branches -a
+
+6- send or push changes to the remote use the command git push. It takes two arguments, the remote I want to send changes to (in this case I named it “origin”), and the name of the local branch that I’d like to push 
+>>git push origin master
+//this means: send changes to the remote branch I created “origin” (step 4), from my local branch “master”
+
+7- to pull the latest version of the remote repo, you’ll need to pull changes from origin to your master
+>>git pull origin master
+//this means: pull or obtain the remote version “origin” into my local version “master”
+
+———————————   Reflections   ———————————
+
+1 - When would you want to use a remote repository rather than keeping all your work
+local?
+
+When we’re sharing our work with my coworkers or doing an online project, and also make sure there is an online backup.
+
+2 - Why might you want to always pull changes manually rather than having Git
+automatically stay up-to-date with your remote repository?
+
+To make sure you have the latest version of the remote repository.
+
+3 - Describe the differences between forks, clones, and branches.  When would you
+use one instead of another?
+
+    Fill in your answer here
+
+4 - What is the benefit of having a copy of the last known state of the remote
+stored locally?
+
+    Fill in your answer here
+
+5 - How would you collaborate without using Git or GitHub?  What would be easier,
+and what would be harder?
+
+    Fill in your answer here
+
+6 - When would you want to make changes in a separate branch rather than directly in
+master?  What benefits does each approach have?
+
+    Fill in your answer here
