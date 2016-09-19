@@ -39,19 +39,6 @@ To list all branches:
 >>git pull origin master
 //this means: pull or obtain the remote version “origin” into my local version “master”
 
-
-
-- - - - - - - - - - - - - - - - - - - - - - — - - — 
-How to delete from git history a file deleted?
-- - - - - - - - - - - - - - - - - - - - - - — - - — 
-1. If you have deleted a file from your Working directory, you’ll need to  delete this from git and then amend this change to a previous commit. For example, I deleted from my Working directory this file.rtf, first, I add with -A command (all) files to the Staging Area. This add files, included the deleted ones.
-- git add -A lesson_3_reflections.rtf
-
-2. $git commit --amend 
-With this command, I’ll include this add that includes the deleted file into the previous command. So, the editor is opened, just save it.
-My file lesson_3_reflections.rtf no longer is included into the history.
-
-
 - - - - - - - - - - - - - - - - - - - - - - — - - — 
 How to stash your work from your Working directory?
 - - - - - - - - - - - - - - - - - - - - - - — - - — 
@@ -97,6 +84,29 @@ $git stash drop stash@{0}
 Dropped stash@{0} (24389c8e2955777a7635987fdc5a933ed45786fc)
 
 -Finally you’ll be able to add to the Staging area and commit changes.
+
+
+- - - - - - - - - - - - - - - - - - - - - - — - - — 
+How to delete from git history a file deleted?
+- - - - - - - - - - - - - - - - - - - - - - — - - — 
+1. If you have deleted a file from your Working directory, you’ll need to  delete this from git and then amend this change to a previous commit. For example, I deleted from my Working directory this file.rtf, first, I add with -A command (all) files to the Staging Area. This add files, included the deleted ones.
+- git add -A lesson_3_reflections.rtf
+
+2. $git commit --amend 
+With this command, I’ll include this add that includes the deleted file into the previous command. So, the editor is opened, just save it.
+My file lesson_3_reflections.rtf no longer is included into the history.
+
+- - - - - - - - - - - - - - - - - - - - - - — - - — 
+How to add commits to your previous commit?
+- - - - - - - - - - - - - - - - - - - - - - — - - — 
+- Add changes to the Staging area
+$ git add . or $git add name_file
+
+- Use commit amend to send this changes to the previous commit, if you want you can change the message with the editor.
+$ git commit --amend
+
+
+
 
 ———————————   Reflections   ———————————
 
