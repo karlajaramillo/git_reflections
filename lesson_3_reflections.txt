@@ -39,6 +39,65 @@ To list all branches:
 >>git pull origin master
 //this means: pull or obtain the remote version “origin” into my local version “master”
 
+
+
+- - - - - - - - - - - - - - - - - - - - - - — - - — 
+How to delete from git history a file deleted?
+- - - - - - - - - - - - - - - - - - - - - - — - - — 
+1. If you have deleted a file from your Working directory, you’ll need to  delete this from git and then amend this change to a previous commit. For example, I deleted from my Working directory this file.rtf, first, I add with -A command (all) files to the Staging Area. This add files, included the deleted ones.
+- git add -A lesson_3_reflections.rtf
+
+2. $git commit --amend 
+With this command, I’ll include this add that includes the deleted file into the previous command. So, the editor is opened, just save it.
+My file lesson_3_reflections.rtf no longer is included into the history.
+
+
+- - - - - - - - - - - - - - - - - - - - - - — - - — 
+How to stash your work from your Working directory?
+- - - - - - - - - - - - - - - - - - - - - - — - - — 
+
+You’re working on a project but don’t want to add changes to the staging area and commit your work. So, you’ll need to use the stash commit to get back to your unfinished changes at any time.
+1. I want to switch branches and to do so, I need to stash the changes of my Working directory because it has unfinished work: lesson3_reflections.txt  
+
+- $git status
+!!!!message: 
+	error: Your local changes to the following files would be overwritten by checkout:
+	lesson_3_reflections.txt
+	Please, commit your changes or stash them before you can switch branches.
+	Aborting!!!!
+
+- To push a new stash onto your stack, run $git stash
+$git stash
+Saved working directory and index state WIP on lesson3: 37847e4 Change to .txt format
+HEAD is now at 37847e4 Change to .txt format
+
+- Now your working directory is clean
+$ git status
+# On branch master
+nothing to commit, working directory clean
+
+-Now you can switch branches an do work elsewhere, your changes are stored on your stack. To see what stashes are stored $git stash list
+$git stash list
+stash@{0}: WIP on lesson3: 37847e4 Change to .txt format
+
+-If you want to apply to one of the older stashes use $git stash apply stash@{0}. If there is only one stash or you don’t specify one, Git assumes the most recent one
+$git stash apply
+On branch lesson3
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   lesson_3_reflections.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+- The apply option only tries to apply the stashed work — you continue to have it on your stack. To remove it, you can run git stash drop with the “name” of the stash to remove
+
+$git stash drop stash@{0}
+Dropped stash@{0} (24389c8e2955777a7635987fdc5a933ed45786fc)
+
+-Finally you’ll be able to add to the Staging area and commit changes.
+
 ———————————   Reflections   ———————————
 
 1 - When would you want to use a remote repository rather than keeping all your work
