@@ -9,6 +9,14 @@ Lesson 3
 - Staging area
 - Commit history
 
+If I checkout to my local master and run the below commands, the files would be change on these places:
+- edit and save README.md: local working directory (only changes the working dir)
+- git add README.md: local staging area (only changes the staging area)
+- git commit: local master branch (the commit command changes the master branch log)
+- git pull origin master: working directory, stating area, local master branch (since I have the master branch checked out, this will also update my working directory and staging area).
+- git push origin master: GitHub master branch (it will take what’s in the local version and push it to the remote, so update the origin/master in remote)
+- merge new_branch pull request: GitHub master branch (if I have a pull request to merge that branch into master, this is accepted and merge in. Then, the new branch will get merged with GitHub master branch).
+
 $git diff —-staged   - check differences between what had been added to the Staging area and the master branch. This is before use $git commit
 
 Git is a part of GitHub
@@ -162,9 +170,27 @@ If you’re happen to be offline, you could obtain the latest version of GitHub 
 5 - How would you collaborate without using Git or GitHub?  What would be easier,
 and what would be harder?
 
-    Fill in your answer here
+    
 
 6 - When would you want to make changes in a separate branch rather than directly in
 master?  What benefits does each approach have?
 
-    Fill in your answer here
+Steps to collaborate, whether I’m working on a feature or a bug.
+-Create and checkout to a new branch
+>> $git checkout -b my_new_branch
+-Being on that new branch, make the changes on your docs
+-Add changes and commit them
+>> $ git add . or $git add mydoc.txt
+>> $ git commit -m “Your message here”
+-Push your changes to the remote repo origin from your new branch
+>> $git push origin my_new_branch
+
+Why is it called Pull Request?
+The person who creates the pull request is trying to push their changes into their master, so is not a pull. It’s because this person is requesting that somebody else pull their branch into the master branch. Another good name for this might be a merge request.
+So if I make a pull request, I want my collaborator to merge my new branch into master branch.
+
+At this moment in time, there will be listed on GitHub your new branch. 
+On GitHub, I should checkout my new branch, scroll down and click Pull Request. By default, GitHub assumes I want to merge my changes into the original repository, but in this case I want to merge into the master branch of my own fork (karlajaramillo/), so click edit and change the base fork. Then, click on Create pull request.
+
+So, my collaborators can see the pull requests and see that I’d like to merge these changes into master. My collaborators will have an email with the pull requests. They have to make sure that the code works. They can leave comments if there is a conflict or error.
+Finally, if my collaborators decide that the change is good and ready to be pulled, then press on Merge pull request button.
