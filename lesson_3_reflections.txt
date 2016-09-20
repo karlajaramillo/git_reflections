@@ -9,6 +9,8 @@ Lesson 3
 - Staging area
 - Commit history
 
+$git diff —-staged   - check differences between what had been added to the Staging area and the master branch. This is before use $git commit
+
 Git is a part of GitHub
 Clone operates with remote
 When you push or pull operates on branches, taken a branch an push or pull to/from the origin or remote repository.
@@ -33,7 +35,7 @@ To list all branches:
 
 6- send or push changes to the remote use the command git push. It takes two arguments, the remote I want to send changes to (in this case I named it “origin”), and the name of the local branch that I’d like to push 
 >>git push origin master
-//this means: send changes to the remote branch I created “origin” (step 4), from my local branch “master”
+//this means: send changes to the remote branch I created “origin” (step 4), from my local branch “master”. If you push the master branch, the local origin/master branch and the remote GitHub branch will get updated with the new commit.
 
 7- to pull the latest version of the remote repo, you’ll need to pull changes from origin to your master
 >>git pull origin master
@@ -123,12 +125,39 @@ To make sure you have the latest version of the remote repository.
 3 - Describe the differences between forks, clones, and branches.  When would you
 use one instead of another?
 
-    Fill in your answer here
+Branches: I can create branches of a repository in my local
+$git checkout -b my_new_branch
+
+Clone: I can clone a complete repository from local to local, from GitHub to local.
+$ git clone url
+
+Fork: GitHub creates a clone of an online repository in my GitHub account. Then, I can clone that online repo to my local using $git clone url. Finally, I’ll be able to push changes to origin from my master $git push origin master
 
 4 - What is the benefit of having a copy of the last known state of the remote
 stored locally?
 
-    Fill in your answer here
+If you have cloned a repository, you should want to get everything up-to-date, it would require merging local and remote branches. When you clone a repo, there is a local copy origin/master. If you want a list of remote branches use $git branch -a
+
+When there are potentially conflicted changes, run $git fetch origin
+Used this command to update local copy of your remote branch, which is “origin/master” (the name of the remote is origin and the name of the branch is master, which is separated by slash /). This leaves your actual local version alone.
+>>>>>$git fetch origin
+
+Then, you can use $git log and $git diff to see what changes were introduced.
+To compare my master with origin/master local
+>>>>>$git log origin/master
+>>>>>$git log master   
+>>>>>$git diff origin/master master    - Check differences between local origin/master and my master branch. Since, local origin/master is updated with GitHub repo because I used fetch before.
+
+Note:
+$git fetch origin     ///update the local origin/master with the last version from GitHub
+$git merge master origin/master    ///incorporate changes from local origin/master to the local master branch
+- - -  is the same as - - - - 
+$git pull origin master  ///First, the remote branch from GitHub gets fetched, updating the local copy (local origin/master )of the remote branch, then that branch (local origin/master) gets merged into the local one (master).
+
+When you finished your work and resolve conflicts,push your changes from the local master to origin in the remote repo in GitHub.
+$git push origin master
+
+If you’re happen to be offline, you could obtain the latest version of GitHub repo using $git fetch origin, and then use git diff and git log to see if there is some conflicts before merging.
 
 5 - How would you collaborate without using Git or GitHub?  What would be easier,
 and what would be harder?
