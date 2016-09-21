@@ -3,6 +3,20 @@
 Lesson 3 
 - - - - - - - - - - - - - - - - - - - - - - - - - - -
 - - - - - - - - - - - - - - - - - - - - - - - - - - -
+>> $git log -n 1     - shows a number of commit history, in this case only one
+>> $git log -p -2    - shows the difference introduced in each commit. You can also use -2, which limits the output to only the last two entries 
+>> $git log --stat   -stats for each commit
+>> $ git log --pretty=oneline    - Another really useful option is --pretty. This option changes the log output to formats other than the default. A few prebuilt options are available for you to use. The oneline option prints each commit on a single line, which is useful if you’re looking at a lot of commits. In addition, the short, full, and fuller options show the output in roughly the same format but with less or more information, respectively:
+ca82a6dff817ec66f44342007202690a93763949 changed the version number
+085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7 removed unnecessary test
+
+>> $ git log --pretty=format:"%h - %an, %ar : %s"   - The most interesting option is format, which allows you to specify your own log output format. This is especially useful when you’re generating output for machine parsing – because you specify the format explicitly, you know it won’t change with updates to Git:
+%h - abbreviated commit hash
+%an - author name
+%ar - author date, relative
+$s  - subject
+ca82a6d - Scott Chacon, 6 years ago : changed the version number
+085bb3b - Scott Chacon, 6 years ago : removed unnecessary test
 
 >> Local:
 - Working directory
@@ -170,20 +184,82 @@ If you’re happen to be offline, you could obtain the latest version of GitHub 
 5 - How would you collaborate without using Git or GitHub?  What would be easier,
 and what would be harder?
 
-    
+It would be harder to keep track of the entire project and the changes made. 
 
 6 - When would you want to make changes in a separate branch rather than directly in
 master?  What benefits does each approach have?
 
+You could make your changes directly to the master branch in your fork, but when contributing to a public repository, it’s standard practice to make the changes in a non-master branch within the fork. This way, you can easily keep your master branch up-to-date with master of the original repository, and merge changes from master into your branch when you are ready.
+
 Steps to collaborate, whether I’m working on a feature or a bug.
--Create and checkout to a new branch
+Case 1:
+——————
+-If you want to clone a repository from GitHub, first “fork” the original repository on GitHub. This will create a remote repo for you in your account
+>>Being on GitHub click on “fork” button
+-Local. Clone your fork using your local terminal. On your GitHub, click on Clone and copy the url for the repository. Then, being in your local on the folder you want to clone that repository, use clone command.
+my_desire_folder >>$git clone url
+ex: git clone https://github.com/karlajaramillo/create-your-own-adventure.git
+-Local. Make a branch to make your changes. Follow Case 2 *****
+
+
+Case 2:
+——————
+If you already have a remote repository on GitHub
+-Pull changes from remote origin/master into my local master branch. To stay up to date
+>>$git pull origin master
+
+*****-Create and checkout to a new branch
 >> $git checkout -b my_new_branch
 -Being on that new branch, make the changes on your docs
--Add changes and commit them
+-Add changes to the Staging area and commit them to update master branch 
 >> $ git add . or $git add mydoc.txt
 >> $ git commit -m “Your message here”
--Push your changes to the remote repo origin from your new branch
->> $git push origin my_new_branch
+-Push your changes from your branch to the remote repository origin/master or your fork(if you fork a repository on GitHub).
+my_new_branch>> $git push origin my_new_branch
+
+>>On GitHub, being on my_new_branch create a pull request to ask s.o else for merging your new_branch into master. Click on “New Pull request”
+>>Then, when there is no conflicts and I have a green light from my collaborators. On GitHub, merge with my master (base fork, from my account), pressing the button to do so.
+>>Finally, pull the changes from the origin/master to my local master branch
+$git pull origin master   - update your local master branch
+Note: you can delete your new_branch locally and remotely, since your commits had been included into the log history of the master branch.
+
+
+
+Case 3: Updating a Cross-repository Pull Request
+——————
+Suppose I have forked a repository, cloned and made a branch with changes. 
+The original repository exists, people make changes on it and I don’t have permission to push changes on it. 
+I want to have my local master updated. Since my fork on GitHub doesn’t have the latest changes.Then, I’ll need to “add a remote repository” to pull changes from that remote to my local master. The name will be upstream, which will be the online master version. I can’t use “origin” because I’ve already have one (for my fork repository). 
+
+upstream: name for the master of the original repository (online)
+origin: name for the master of my fork repository (online)
+
+- Add the original repository as a remote in my clone. Being in your directory and branch.
+my_branch>>$git remote add upstream git@github.com:udacity/create-your-own-adventure.git
+upstream: this will be the name of the original repo online, upstream/master
+
+- Pull the “master” branch from the original repository.
+Update my local master branch with the latest version of the original online repository, not my fork, “the original”. Let’s check out to my master branch and bring it up to date with the original repository by running git pull upstream master
+>>$git checkout master
+>>$git pull upstream master    - pull changes from upstream (master remote repository) to my local master
+At this time my local master is up-to-date
+
+- Merge the local “master” branch into my change branch. Being on my branch.
+>>$git checkout my_branch
+my_branch >>$git merge master my_branch
+
+-Resolve conflicts. Get rid of the special lines of the document and the other versions of the file (>>>HEAD, ======merged common ancestors).
+
+-Add the file and commit changes to complete the merge
+my_branch>>$git add .
+my_branch>>$git commit- Push my change branch to my fork(GitHub)
+
+-Push your local branch to the origin of my fork(remote master in my fork)
+my_branch>>$git push origin my_branch
+
+-I also have my origin/master branch up-to-date, so checkout master and push
+>>git checkout master
+>>git push origin master
 
 Why is it called Pull Request?
 The person who creates the pull request is trying to push their changes into their master, so is not a pull. It’s because this person is requesting that somebody else pull their branch into the master branch. Another good name for this might be a merge request.
